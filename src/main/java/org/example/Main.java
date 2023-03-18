@@ -4,7 +4,8 @@ public class Main {
     public static void main(String[] args) {
         String[][] grid = new String[10][10];
 
-        grid[0][0] = "CB";
+        addSquare(grid, 0, 0, "CB");
+        addSquare(grid, 3, 5, "CB");
 
         printGrid(grid);
     }
@@ -17,5 +18,9 @@ public class Main {
             }
             System.out.print("\n");
         }
+    }
+
+    private static void addSquare(String[][] grid, int row, int col, String name) {
+        grid[row][col] = name;
     }
 }
