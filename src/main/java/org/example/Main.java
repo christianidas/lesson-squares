@@ -5,24 +5,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
+    private static String COMMAND_MESSAGE = "Please enter a command";
+
     public static void main(String[] args) throws IOException {
         String[][] grid = new String[10][10];
 
-        printGrid(grid);
+        do {
+            printGrid(grid);
 
-        String command = prompt("Please enter a command");
-
-        while (!command.equalsIgnoreCase("q")) {
+            String command = prompt(COMMAND_MESSAGE);
             if (command.equalsIgnoreCase("add")) {
                 int row = Integer.parseInt(prompt("Row"));
                 int col = Integer.parseInt(prompt("Col"));
                 String name = prompt("Name");
                 addSquare(grid, row, col, name);
+            } else if (command.equalsIgnoreCase("q")) {
+                break;
             }
-
-            printGrid(grid);
-            command = prompt("Please enter a command");
-        }
+        } while (true);
     }
 
     private static void printGrid(String[][] grid) {
