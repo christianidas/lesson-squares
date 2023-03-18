@@ -8,14 +8,21 @@ public class Main {
     public static void main(String[] args) throws IOException {
         String[][] grid = new String[10][10];
 
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
-                String name = prompt(String.format("Enter a name for row %d col %d: ", i, j));
-                addSquare(grid, i, j, name);
-            }
-        }
-
         printGrid(grid);
+
+        String command = prompt("Please enter a command");
+
+        while (!command.equalsIgnoreCase("q")) {
+            if (command.equalsIgnoreCase("add")) {
+                int row = Integer.parseInt(prompt("Row"));
+                int col = Integer.parseInt(prompt("Col"));
+                String name = prompt("Name");
+                addSquare(grid, row, col, name);
+            }
+
+            printGrid(grid);
+            command = prompt("Please enter a command");
+        }
     }
 
     private static void printGrid(String[][] grid) {
