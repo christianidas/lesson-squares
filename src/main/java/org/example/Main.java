@@ -10,9 +10,7 @@ public class Main {
 
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
-                System.out.printf("Enter a name for row %d col %d: ", i, j);
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-                String name = bufferedReader.readLine();
+                String name = prompt(String.format("Enter a name for row %d col %d: ", i, j));
                 addSquare(grid, i, j, name);
             }
         }
@@ -32,5 +30,11 @@ public class Main {
 
     private static void addSquare(String[][] grid, int row, int col, String name) {
         grid[row][col] = name;
+    }
+
+    private static String prompt(String message) throws IOException {
+        System.out.printf("%s: ", message);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        return bufferedReader.readLine();
     }
 }
