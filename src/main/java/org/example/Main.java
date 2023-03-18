@@ -4,10 +4,10 @@ public class Main {
     public static void main(String[] args) {
         String[][] grid = new String[10][10];
 
-        for (int i = 0; i < grid.length; i++) {
+        for (String[] row : grid) {
             System.out.print("| ");
-            for (int j = 0; j < grid[i].length; j++) {
-                System.out.printf(" %s |", grid[i][j]);
+            for (String col : row) {
+                System.out.printf(" %s |", col);
             }
             System.out.print("\n");
         }
