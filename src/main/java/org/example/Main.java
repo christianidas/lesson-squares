@@ -4,6 +4,8 @@ public class Main {
     public static void main(String[] args) {
         String[][] grid = new String[10][10];
 
+        grid[0][0] = "CB";
+
         printGrid(grid);
     }
 
