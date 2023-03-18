@@ -6,6 +6,7 @@ public class Main {
 
         addSquare(grid, 0, 0, "CB");
         addSquare(grid, 3, 5, "CB");
+        addSquare(grid, 1, 4, "CW");
 
         printGrid(grid);
     }
