@@ -4,11 +4,34 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+class Grid {
+    private String[][] squares = new String[10][10];
+    public Grid() {
+
+    }
+
+    public String[][] getSquares() {
+        return squares;
+    }
+
+    public void setSquares(String[][] squares) {
+        this.squares = squares;
+    }
+
+    public void addSquare(int row, int col, String name) {
+        squares[row][col] = name;
+    }
+
+    public void removeSquare(int row, int col) {
+        squares[row][col] = null;
+    }
+}
+
 public class Main {
     private static final String COMMAND_MESSAGE = "Please enter a command";
 
     public static void main(String[] args) throws IOException {
-        String[][] grid = new String[10][10];
+        Grid grid = new Grid();
 
         do {
             printGrid(grid);
@@ -25,13 +48,13 @@ public class Main {
                     int rowToAdd = Integer.parseInt(prompt("Row"));
                     int colToAdd = Integer.parseInt(prompt("Col"));
                     String name = prompt("Name");
-                    addSquare(grid, rowToAdd, colToAdd, name);
+                    grid.addSquare(rowToAdd, colToAdd, name);
                     break;
                 case "remove":
                 case "r":
                     int rowToRemove = Integer.parseInt(prompt("Row"));
                     int colToRemove = Integer.parseInt(prompt("Col"));
-                    removeSquare(grid, rowToRemove, colToRemove);
+                    grid.removeSquare(rowToRemove, colToRemove);
                     break;
                 default:
                     System.out.println("Invalid command!");
@@ -39,9 +62,9 @@ public class Main {
         } while (true);
     }
 
-    private static void printGrid(String[][] grid) {
+    private static void printGrid(Grid grid) {
         System.out.println("---------------------------------------------------");
-        for (String[] row : grid) {
+        for (String[] row : grid.getSquares()) {
             System.out.print("|");
             for (String col : row) {
                 if (col != null) {
@@ -52,14 +75,6 @@ public class Main {
             }
             System.out.print("\n---------------------------------------------------\n");
         }
-    }
-
-    private static void addSquare(String[][] grid, int row, int col, String name) {
-        grid[row][col] = name;
-    }
-
-    private static void removeSquare(String[][] grid, int row, int col) {
-        grid[row][col] = null;
     }
 
     private static String prompt(String message) throws IOException {
