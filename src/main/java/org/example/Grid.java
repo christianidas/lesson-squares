@@ -22,4 +22,22 @@ class Grid {
     public void removeSquare(int row, int col) {
         squares[row][col] = null;
     }
+
+    @Override
+    public String toString() {
+        String str = "---------------------------------------------------\n";
+        for (String[] row : getSquares()) {
+            str += "|";
+            for (String col : row) {
+                if (col != null) {
+                    str += String.format(" %s |", col);
+                } else {
+                    str += String.format(" %s |", "  ");
+                }
+            }
+            str += "\n---------------------------------------------------\n";
+        }
+
+        return str;
+    }
 }
