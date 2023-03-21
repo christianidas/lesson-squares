@@ -15,9 +15,10 @@ class Grid {
         this.squares = people;
     }
 
-    public void addSquare(int row, int col, String name) {
+    public void addSquare(int row, int col, String name, String initials) {
         Person person = new Person();
         person.setName(name);
+        person.setInitials(initials);
         squares[row][col] = person;
     }
 
@@ -32,7 +33,7 @@ class Grid {
             str += "|";
             for (Person col : row) {
                 if (col != null) {
-                    str += String.format(" %s |", col.getName());
+                    str += String.format(" %s |", col.getInitials());
                 } else {
                     str += String.format(" %s |", "  ");
                 }
