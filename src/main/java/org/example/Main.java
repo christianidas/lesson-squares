@@ -24,6 +24,10 @@ public class Main {
                 int col = Integer.parseInt(prompt("Col"));
                 String name = prompt("Name");
                 addSquare(grid, row, col, name);
+            } else if (command.equalsIgnoreCase("remove")) {
+                int row = Integer.parseInt(prompt("Row"));
+                int col = Integer.parseInt(prompt("Col"));
+                removeSquare(grid, row, col);
             }
         } while (true);
     }
@@ -40,6 +44,10 @@ public class Main {
 
     private static void addSquare(String[][] grid, int row, int col, String name) {
         grid[row][col] = name;
+    }
+
+    private static void removeSquare(String[][] grid, int row, int col) {
+        grid[row][col] = null;
     }
 
     private static String prompt(String message) throws IOException {
