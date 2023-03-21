@@ -21,12 +21,14 @@ public class Main {
 
             switch (command) {
                 case "add":
+                case "a":
                     int rowToAdd = Integer.parseInt(prompt("Row"));
                     int colToAdd = Integer.parseInt(prompt("Col"));
                     String name = prompt("Name");
                     addSquare(grid, rowToAdd, colToAdd, name);
                     break;
                 case "remove":
+                case "r":
                     int rowToRemove = Integer.parseInt(prompt("Row"));
                     int colToRemove = Integer.parseInt(prompt("Col"));
                     removeSquare(grid, rowToRemove, colToRemove);
