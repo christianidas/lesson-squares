@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Grid.Grid;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

@@ -1,6 +1,8 @@
-package org.example;
+package org.example.Grid;
 
-class Grid {
+import org.example.Person.Person;
+
+public class Grid {
     private Person[][] squares;
 
     public Grid() {
