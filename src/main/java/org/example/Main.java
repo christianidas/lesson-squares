@@ -40,12 +40,17 @@ public class Main {
     }
 
     private static void printGrid(String[][] grid) {
+        System.out.println("---------------------------------------------------");
         for (String[] row : grid) {
-            System.out.print("| ");
+            System.out.print("|");
             for (String col : row) {
-                System.out.printf(" %s |", col);
+                if (col != null) {
+                    System.out.printf(" %s |", col);
+                } else {
+                    System.out.printf(" %s |", "  ");
+                }
             }
-            System.out.print("\n");
+            System.out.print("\n---------------------------------------------------\n");
         }
     }
 
