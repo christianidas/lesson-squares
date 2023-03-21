@@ -40,18 +40,7 @@ public class Main {
     }
 
     private static void printGrid(Grid grid) {
-        System.out.println("---------------------------------------------------");
-        for (String[] row : grid.getSquares()) {
-            System.out.print("|");
-            for (String col : row) {
-                if (col != null) {
-                    System.out.printf(" %s |", col);
-                } else {
-                    System.out.printf(" %s |", "  ");
-                }
-            }
-            System.out.print("\n---------------------------------------------------\n");
-        }
+        System.out.print(grid);
     }
 
     private static String prompt(String message) throws IOException {
