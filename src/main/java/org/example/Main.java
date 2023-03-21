@@ -13,18 +13,18 @@ public class Main {
         do {
             printGrid(grid);
 
-            String command = prompt(COMMAND_MESSAGE);
+            String command = prompt(COMMAND_MESSAGE).toLowerCase();
 
-            if (command.equalsIgnoreCase("q")) {
+            if (command.equals("q")) {
                 break;
             }
 
-            if (command.equalsIgnoreCase("add")) {
+            if (command.equals("add")) {
                 int row = Integer.parseInt(prompt("Row"));
                 int col = Integer.parseInt(prompt("Col"));
                 String name = prompt("Name");
                 addSquare(grid, row, col, name);
-            } else if (command.equalsIgnoreCase("remove")) {
+            } else if (command.equals("remove")) {
                 int row = Integer.parseInt(prompt("Row"));
                 int col = Integer.parseInt(prompt("Col"));
                 removeSquare(grid, row, col);
