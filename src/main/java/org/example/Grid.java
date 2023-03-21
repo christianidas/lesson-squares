@@ -1,22 +1,24 @@
 package org.example;
 
 class Grid {
-    private String[][] squares = new String[10][10];
+    private Person[][] squares = new Person[10][10];
 
     public Grid() {
 
     }
 
-    public String[][] getSquares() {
+    public Person[][] getSquares() {
         return squares;
     }
 
-    public void setSquares(String[][] squares) {
-        this.squares = squares;
+    public void setSquares(Person[][] people) {
+        this.squares = people;
     }
 
     public void addSquare(int row, int col, String name) {
-        squares[row][col] = name;
+        Person person = new Person();
+        person.setName(name);
+        squares[row][col] = person;
     }
 
     public void removeSquare(int row, int col) {
@@ -26,11 +28,11 @@ class Grid {
     @Override
     public String toString() {
         String str = "---------------------------------------------------\n";
-        for (String[] row : getSquares()) {
+        for (Person[] row : getSquares()) {
             str += "|";
-            for (String col : row) {
+            for (Person col : row) {
                 if (col != null) {
-                    str += String.format(" %s |", col);
+                    str += String.format(" %s |", col.getName());
                 } else {
                     str += String.format(" %s |", "  ");
                 }
