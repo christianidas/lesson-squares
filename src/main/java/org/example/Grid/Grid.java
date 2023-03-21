@@ -33,13 +33,18 @@ public class Grid {
 
     @Override
     public String toString() {
-        String str = "";
+        String str = " ";
+        for (int i = 0; i < squares[0].length; i++) {
+            str += "    " + i;
+        }
+        str += "\n   ";
         for (int i = 0; i < squares[0].length; i++) {
             str += "-----";
         }
         str += "-\n";
-        for (Person[] row : getSquares()) {
-            str += "|";
+        for (int i = 0; i < squares.length; i++) {
+            Person[] row = squares[i];
+            str += i + "  |";
             for (Person col : row) {
                 if (col != null) {
                     str += String.format(" %s |", col.getInitials());
@@ -47,8 +52,8 @@ public class Grid {
                     str += String.format(" %s |", "  ");
                 }
             }
-            str += "\n";
-            for (int i = 0; i < squares[0].length; i++) {
+            str += "\n   ";
+            for (int j = 0; j < squares[0].length; j++) {
                 str += "-----";
             }
             str += "-\n";
