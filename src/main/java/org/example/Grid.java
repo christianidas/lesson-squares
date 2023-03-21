@@ -27,7 +27,11 @@ class Grid {
 
     @Override
     public String toString() {
-        String str = "---------------------------------------------------\n";
+        String str = "";
+        for (int i = 0; i < squares[0].length; i++) {
+            str += "-----";
+        }
+        str += "-\n";
         for (Person[] row : getSquares()) {
             str += "|";
             for (Person col : row) {
@@ -37,7 +41,11 @@ class Grid {
                     str += String.format(" %s |", "  ");
                 }
             }
-            str += "\n---------------------------------------------------\n";
+            str += "\n";
+            for (int i = 0; i < squares[0].length; i++) {
+                str += "-----";
+            }
+            str += "-\n";
         }
 
         return str;
