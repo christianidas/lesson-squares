@@ -19,15 +19,20 @@ public class Main {
                 break;
             }
 
-            if (command.equals("add")) {
-                int row = Integer.parseInt(prompt("Row"));
-                int col = Integer.parseInt(prompt("Col"));
-                String name = prompt("Name");
-                addSquare(grid, row, col, name);
-            } else if (command.equals("remove")) {
-                int row = Integer.parseInt(prompt("Row"));
-                int col = Integer.parseInt(prompt("Col"));
-                removeSquare(grid, row, col);
+            switch (command) {
+                case "add":
+                    int rowToAdd = Integer.parseInt(prompt("Row"));
+                    int colToAdd = Integer.parseInt(prompt("Col"));
+                    String name = prompt("Name");
+                    addSquare(grid, rowToAdd, colToAdd, name);
+                    break;
+                case "remove":
+                    int rowToRemove = Integer.parseInt(prompt("Row"));
+                    int colToRemove = Integer.parseInt(prompt("Col"));
+                    removeSquare(grid, rowToRemove, colToRemove);
+                    break;
+                default:
+                    System.out.println("Invalid command!");
             }
         } while (true);
     }
