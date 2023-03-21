@@ -14,13 +14,16 @@ public class Main {
             printGrid(grid);
 
             String command = prompt(COMMAND_MESSAGE);
+
+            if (command.equalsIgnoreCase("q")) {
+                break;
+            }
+
             if (command.equalsIgnoreCase("add")) {
                 int row = Integer.parseInt(prompt("Row"));
                 int col = Integer.parseInt(prompt("Col"));
                 String name = prompt("Name");
                 addSquare(grid, row, col, name);
-            } else if (command.equalsIgnoreCase("q")) {
-                break;
             }
         } while (true);
     }
