@@ -1,10 +1,10 @@
 package org.example;
 
 class Grid {
-    private Person[][] squares = new Person[10][10];
+    private Person[][] squares;
 
-    public Grid() {
-
+    public Grid(int rows, int cols) {
+        squares = new Person[rows][cols];
     }
 
     public Person[][] getSquares() {
