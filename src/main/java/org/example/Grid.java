@@ -3,6 +3,10 @@ package org.example;
 class Grid {
     private Person[][] squares;
 
+    public Grid() {
+        squares = new Person[10][10];
+    }
+
     public Grid(int rows, int cols) {
         squares = new Person[rows][cols];
     }

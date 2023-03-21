@@ -8,7 +8,7 @@ public class Main {
     private static final String COMMAND_MESSAGE = "Please enter a command";
 
     public static void main(String[] args) throws IOException {
-        Grid grid = new Grid(10, 10);
+        Grid grid = new Grid();
 
         do {
             printGrid(grid);
