@@ -2,7 +2,6 @@ package org.example;
 
 public class Person {
     private String name;
-    private String initials;
 
     public Person() {
 
@@ -17,10 +16,6 @@ public class Person {
     }
 
     public String getInitials() {
-        return initials;
-    }
-
-    public void setInitials(String initials) {
-        this.initials = initials;
+        return name.toUpperCase().substring(0, 2);
     }
 }
