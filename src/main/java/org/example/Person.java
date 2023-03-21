@@ -16,6 +16,11 @@ public class Person {
     }
 
     public String getInitials() {
-        return name.toUpperCase().substring(0, 2);
+        String[] parts = name.toUpperCase().split(" ");
+        if (parts.length > 1) {
+            return parts[0].substring(0, 1) + parts[1].substring(0, 1);
+        } else {
+            return parts[0].substring(0, 2);
+        }
     }
 }
