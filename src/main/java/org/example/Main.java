@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
-    private static String COMMAND_MESSAGE = "Please enter a command";
+    private static final String COMMAND_MESSAGE = "Please enter a command";
 
     public static void main(String[] args) throws IOException {
         String[][] grid = new String[10][10];
