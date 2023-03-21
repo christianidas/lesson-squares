@@ -15,10 +15,9 @@ class Grid {
         this.squares = people;
     }
 
-    public void addSquare(int row, int col, String name, String initials) {
+    public void addSquare(int row, int col, String name) {
         Person person = new Person();
         person.setName(name);
-        person.setInitials(initials);
         squares[row][col] = person;
     }
 

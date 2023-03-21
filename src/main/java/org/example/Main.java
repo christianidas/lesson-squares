@@ -25,8 +25,7 @@ public class Main {
                     int rowToAdd = Integer.parseInt(prompt("Row"));
                     int colToAdd = Integer.parseInt(prompt("Col"));
                     String name = prompt("Name");
-                    String initials = prompt("Initials");
-                    grid.addSquare(rowToAdd, colToAdd, name, initials);
+                    grid.addSquare(rowToAdd, colToAdd, name);
                     break;
                 case "remove":
                 case "r":
