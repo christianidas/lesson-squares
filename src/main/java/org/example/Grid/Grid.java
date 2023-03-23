@@ -36,14 +36,18 @@ public class Grid {
         squares[row][col].setOwner(null);
     }
 
+    private int getColCount() {
+        return squares[0].length;
+    }
+
     @Override
     public String toString() {
         String str = " ";
-        for (int i = 0; i < squares[0].length; i++) {
+        for (int i = 0; i < getColCount(); i++) {
             str += "    " + i;
         }
         str += "\n   ";
-        for (int i = 0; i < squares[0].length; i++) {
+        for (int i = 0; i < getColCount(); i++) {
             str += "-----";
         }
         str += "-\n";
@@ -58,7 +62,7 @@ public class Grid {
                 }
             }
             str += "\n   ";
-            for (int j = 0; j < squares[0].length; j++) {
+            for (int j = 0; j < getColCount(); j++) {
                 str += "-----";
             }
             str += "-\n";
