@@ -11,6 +11,11 @@ public class Grid {
 
     public Grid(int rows, int cols) {
         squares = new Square[rows][cols];
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                squares[i][j] = new Square();
+            }
+        }
     }
 
     public Square[][] getSquares() {
@@ -22,15 +27,13 @@ public class Grid {
     }
 
     public void addSquare(int row, int col, String name) {
-        Square square = new Square();
         Person person = new Person();
         person.setName(name);
-        square.setOwner(person);
-        squares[row][col] = square;
+        squares[row][col].setOwner(person);
     }
 
     public void removeSquare(int row, int col) {
-        squares[row][col] = null;
+        squares[row][col].setOwner(null);
     }
 
     @Override
@@ -48,7 +51,7 @@ public class Grid {
             Square[] row = squares[i];
             str += i + "  |";
             for (Square col : row) {
-                if (col != null) {
+                if (col.getOwner() != null) {
                     str += String.format(" %s |", col.getOwner().getInitials());
                 } else {
                     str += String.format(" %s |", "  ");
