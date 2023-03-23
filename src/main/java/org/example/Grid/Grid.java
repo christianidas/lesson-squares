@@ -3,28 +3,30 @@ package org.example.Grid;
 import org.example.Person.Person;
 
 public class Grid {
-    private Person[][] squares;
+    private Square[][] squares;
 
     public Grid() {
-        squares = new Person[10][10];
+        squares = new Square[10][10];
     }
 
     public Grid(int rows, int cols) {
-        squares = new Person[rows][cols];
+        squares = new Square[rows][cols];
     }
 
-    public Person[][] getSquares() {
+    public Square[][] getSquares() {
         return squares;
     }
 
-    public void setSquares(Person[][] people) {
+    public void setSquares(Square[][] people) {
         this.squares = people;
     }
 
     public void addSquare(int row, int col, String name) {
+        Square square = new Square();
         Person person = new Person();
         person.setName(name);
-        squares[row][col] = person;
+        square.setOwner(person);
+        squares[row][col] = square;
     }
 
     public void removeSquare(int row, int col) {
@@ -43,11 +45,11 @@ public class Grid {
         }
         str += "-\n";
         for (int i = 0; i < squares.length; i++) {
-            Person[] row = squares[i];
+            Square[] row = squares[i];
             str += i + "  |";
-            for (Person col : row) {
+            for (Square col : row) {
                 if (col != null) {
-                    str += String.format(" %s |", col.getInitials());
+                    str += String.format(" %s |", col.getOwner().getInitials());
                 } else {
                     str += String.format(" %s |", "  ");
                 }
