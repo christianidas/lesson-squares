@@ -6,7 +6,7 @@ public class Grid {
     private Square[][] squares;
 
     public Grid() {
-        squares = new Square[10][10];
+        this(10, 10);
     }
 
     public Grid(int rows, int cols) {
