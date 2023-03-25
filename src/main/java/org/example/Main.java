@@ -32,13 +32,13 @@ public class Main {
                 case "a":
                     switch (entity) {
                         case "grid":
-                            gridService.create(new Grid());
+                            System.out.println(gridService.create(new Grid()));
                             break;
                         case "person":
                             Person person = new Person();
                             String name = prompt("Name");
                             person.setName(name);
-                            personService.create(person);
+                            System.out.println(personService.create(person));
                             break;
                         default:
                             System.out.println("Invalid command!");
@@ -49,12 +49,10 @@ public class Main {
                     index = Integer.parseInt(parts[2]);
                     switch (entity) {
                         case "grid":
-                            Grid grid = gridService.get(index);
-                            System.out.println(grid);
+                            System.out.println(gridService.get(index));
                             break;
                         case "person":
-                            Person person = personService.get(index);
-                            System.out.println(person);
+                            System.out.println(personService.get(index));
                             break;
                         default:
                             System.out.println("Invalid command!");
