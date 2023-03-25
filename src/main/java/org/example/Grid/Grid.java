@@ -2,46 +2,57 @@ package org.example.Grid;
 
 import org.example.Person.Person;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 public class Grid {
-    private Square[][] squares;
+    private List<Square> squares;
 
     public Grid() {
         this(10, 10);
     }
 
     public Grid(int rows, int cols) {
-        squares = new Square[rows][cols];
+        squares = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                squares[i][j] = new Square();
+                Square square = new Square();
+                square.setRow(i);
+                square.setCol(j);
+                squares.add(square);
             }
         }
     }
 
-    public Square[][] getSquares() {
+    public List<Square> getSquares() {
         return squares;
     }
 
-    public void setSquares(Square[][] people) {
-        this.squares = people;
+    public void setSquares(List<Square> squares) {
+        this.squares = squares;
     }
 
     public void addSquare(int row, int col, String name) {
         Person person = new Person();
         person.setName(name);
-        squares[row][col].setOwner(person);
+        squares.stream().filter(square -> square.getRow() == row && square.getCol() == col).forEach(square -> square.setOwner(person));
     }
 
     public void removeSquare(int row, int col) {
-        squares[row][col].setOwner(null);
+        squares.stream().filter(square -> square.getRow() == row && square.getCol() == col).forEach(square -> square.setOwner(null));
     }
 
     private int getRowCount() {
-        return squares.length;
+        return squares.stream().map(Square::getCol).max(Comparator.comparingInt(a -> a)).orElse(0);
     }
 
     private int getColCount() {
-        return squares[0].length;
+        return squares.stream().map(Square::getRow).max(Comparator.comparingInt(a -> a)).orElse(0);
+    }
+
+    private Square getSquare(int row, int col) {
+        return squares.stream().filter(s -> s.getRow() == row && s.getCol() == col).findAny().orElse(null);
     }
 
     @Override
@@ -56,11 +67,11 @@ public class Grid {
         }
         str += "-\n";
         for (int i = 0; i < getRowCount(); i++) {
-            Square[] row = squares[i];
             str += i + "  |";
-            for (Square col : row) {
-                if (col.getOwner() != null) {
-                    str += String.format(" %s |", col.getOwner().getInitials());
+            for (int j = 0; j < getColCount(); j++) {
+                Square square = getSquare(i, j);
+                if (square.getOwner() != null) {
+                    str += String.format(" %s |", square.getOwner().getInitials());
                 } else {
                     str += String.format(" %s |", "  ");
                 }
