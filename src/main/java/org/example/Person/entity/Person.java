@@ -23,4 +23,12 @@ public class Person {
             return parts[0].substring(0, 2);
         }
     }
+
+    @Override
+    public String toString() {
+        String str = "";
+        str += getName();
+        str += " (" + getInitials() + ")";
+        return str;
+    }
 }
