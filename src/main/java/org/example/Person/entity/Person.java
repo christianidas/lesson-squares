@@ -1,4 +1,4 @@
-package org.example.Person;
+package org.example.Person.entity;
 
 public class Person {
     private String name;

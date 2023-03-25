@@ -1,6 +1,6 @@
-package org.example.Grid;
+package org.example.Grid.entity;
 
-import org.example.Person.Person;
+import org.example.Person.entity.Person;
 
 import java.util.ArrayList;
 import java.util.Comparator;

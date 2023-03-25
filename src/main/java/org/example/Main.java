@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.Grid.Grid;
+import org.example.Grid.entity.Grid;
 
 import java.io.BufferedReader;
 import java.io.IOException;
