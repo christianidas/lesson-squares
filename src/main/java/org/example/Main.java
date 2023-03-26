@@ -40,6 +40,8 @@ public class Main {
 
             switch (entity) {
                 case "grid":
+                    Grid grid;
+
                     switch (action) {
                         case "add":
                         case "a":
@@ -51,7 +53,6 @@ public class Main {
                             break;
                         case "update":
                         case "u":
-                            Grid grid;
                             int row;
                             int col;
                             String updateAction = prompt("Add or remove a square?");
