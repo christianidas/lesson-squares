@@ -51,11 +51,7 @@ public class Main {
                             break;
                         case "update":
                         case "u":
-                            try {
-                                CommandLineInterface.print(gridController.update(index));
-                            } catch (Exception e) {
-                                CommandLineInterface.print(e.getMessage());
-                            }
+                            CommandLineInterface.print(gridController.update(index));
                             break;
                         case "remove":
                         case "r":

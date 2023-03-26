@@ -30,7 +30,7 @@ public class GridController {
         return gridService.get(index);
     }
 
-    public Grid update(int index) throws Exception {
+    public Grid update(int index) {
         Grid grid;
         int row;
         int col;
@@ -53,7 +53,8 @@ public class GridController {
                 grid.getSquares().stream().filter(square -> square.getRow() == row && square.getCol() == col).findAny().ifPresent(square -> square.setOwner(null));
                 return gridService.update(index, grid);
             default:
-                throw new Exception("Invalid command!");
+                CommandLineInterface.print("Invalid command!");
+                return update(index);
         }
     }
 
