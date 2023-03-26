@@ -8,6 +8,7 @@ import org.example.Person.service.PersonService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.stream.Collectors;
 
 public class Main {
     private static final String COMMAND_MESSAGE = "Please enter a command";
@@ -27,6 +28,11 @@ public class Main {
 
             String action = parts[0];
             String entity = parts[1];
+            int index = 0;
+
+            if (parts.length > 2) {
+                index = Integer.parseInt(parts[2]);
+            }
 
             if (command.equals("q")) {
                 break;
@@ -41,11 +47,39 @@ public class Main {
                             break;
                         case "get":
                         case "g":
-                            System.out.println(gridService.get(Integer.parseInt(parts[2])));
+                            System.out.println(gridService.get(index));
+                            break;
+                        case "update":
+                        case "u":
+                            Grid grid;
+                            int row;
+                            int col;
+                            String updateAction = prompt("Add or remove a square?");
+                            switch (updateAction) {
+                                case "add":
+                                case "a":
+                                    int personIndex = Integer.parseInt(prompt("Who are we adding?"));
+                                    Person person = personService.get(personIndex);
+                                    row = Integer.parseInt(prompt("Row"));
+                                    col = Integer.parseInt(prompt("Col"));
+                                    grid = gridService.get(index);
+                                    grid.getSquares().stream().filter(square -> square.getRow() == row && square.getCol() == col).findAny().ifPresent(square -> square.setOwner(person));
+                                    System.out.println(gridService.update(index, grid));
+                                    break;
+                                case "remove":
+                                case "r":
+                                    row = Integer.parseInt(prompt("Row"));
+                                    col = Integer.parseInt(prompt("Col"));
+                                    grid = gridService.get(index);
+                                    grid.getSquares().stream().filter(square -> square.getRow() == row && square.getCol() == col).findAny().ifPresent(square -> square.setOwner(null));
+                                    break;
+                                default:
+                                    System.out.println("Invalid command!");
+                            }
                             break;
                         case "remove":
                         case "r":
-                            gridService.delete(Integer.parseInt(parts[2]));
+                            gridService.delete(index);
                             break;
                         default:
                             System.out.println("Invalid command!");
@@ -62,11 +96,11 @@ public class Main {
                             break;
                         case "get":
                         case "g":
-                            System.out.println(personService.get(Integer.parseInt(parts[2])));
+                            System.out.println(personService.get(index));
                             break;
                         case "remove":
                         case "r":
-                            personService.delete(Integer.parseInt(parts[2]));
+                            personService.delete(index);
                             break;
                         default:
                             System.out.println("Invalid command!");
