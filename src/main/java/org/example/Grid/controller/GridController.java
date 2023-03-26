@@ -44,7 +44,6 @@ public class GridController {
                 col = Integer.parseInt(CommandLineInterface.prompt("Col"));
                 grid = gridService.get(index);
                 grid.getSquares().stream().filter(square -> square.getRow() == row && square.getCol() == col).findAny().ifPresent(square -> square.setOwner(person));
-                System.out.println(gridService.update(index, grid));
                 return gridService.update(index, grid);
             case "remove":
             case "r":
