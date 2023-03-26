@@ -1,14 +1,13 @@
 package org.example;
 
-import org.example.Grid.entity.Grid;
+import org.example.Grid.controller.GridController;
 import org.example.Grid.service.GridService;
-import org.example.Person.entity.Person;
+import org.example.Person.controller.PersonController;
 import org.example.Person.service.PersonService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.stream.Collectors;
 
 public class Main {
     private static final String COMMAND_MESSAGE = "Please enter a command";
@@ -16,6 +15,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         final GridService gridService = new GridService();
         final PersonService personService = new PersonService();
+        final GridController gridController = new GridController(gridService, personService);
+        final PersonController personController = new PersonController(personService);
 
         do {
             String command = prompt(COMMAND_MESSAGE).toLowerCase();
@@ -40,73 +41,44 @@ public class Main {
 
             switch (entity) {
                 case "grid":
-                    Grid grid;
-
                     switch (action) {
                         case "add":
                         case "a":
-                            System.out.println(gridService.create(new Grid()));
+                            System.out.println(gridController.create());
                             break;
                         case "get":
                         case "g":
-                            System.out.println(gridService.get(index));
+                            System.out.println(gridController.get(index));
                             break;
                         case "update":
                         case "u":
-                            int row;
-                            int col;
-                            String updateAction = prompt("Add or remove a square?");
-                            switch (updateAction) {
-                                case "add":
-                                case "a":
-                                    int personIndex = Integer.parseInt(prompt("Who are we adding?"));
-                                    Person person = personService.get(personIndex);
-                                    row = Integer.parseInt(prompt("Row"));
-                                    col = Integer.parseInt(prompt("Col"));
-                                    grid = gridService.get(index);
-                                    grid.getSquares().stream().filter(square -> square.getRow() == row && square.getCol() == col).findAny().ifPresent(square -> square.setOwner(person));
-                                    System.out.println(gridService.update(index, grid));
-                                    break;
-                                case "remove":
-                                case "r":
-                                    grid = gridService.get(index);
-                                    row = Integer.parseInt(prompt("Row"));
-                                    col = Integer.parseInt(prompt("Col"));
-                                    grid.getSquares().stream().filter(square -> square.getRow() == row && square.getCol() == col).findAny().ifPresent(square -> square.setOwner(null));
-                                    break;
-                                default:
-                                    System.out.println("Invalid command!");
+                            try {
+                                System.out.println(gridController.update(index));
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
                             }
                             break;
                         case "remove":
                         case "r":
-                            gridService.delete(index);
+                            gridController.delete(index);
                             break;
                         default:
                             System.out.println("Invalid command!");
                     }
                     break;
                 case "person":
-                    Person person;
-                    String name;
                     switch (action) {
                         case "add":
                         case "a":
-                            person = new Person();
-                            name = prompt("Name");
-                            person.setName(name);
-                            System.out.println(personService.create(person));
+                            System.out.println(personController.create());
                             break;
                         case "get":
                         case "g":
-                            System.out.println(personService.get(index));
+                            System.out.println(personController.get(index));
                             break;
                         case "update":
                         case "u":
-                            person = personService.get(index);
-                            name = prompt("Name");
-                            person.setName(name);
-                            personService.update(index, person);
+                            System.out.println(personController.update(index));
                             break;
                         case "remove":
                         case "r":
