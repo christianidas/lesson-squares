@@ -87,17 +87,26 @@ public class Main {
                     }
                     break;
                 case "person":
+                    Person person;
+                    String name;
                     switch (action) {
                         case "add":
                         case "a":
-                            Person person = new Person();
-                            String name = prompt("Name");
+                            person = new Person();
+                            name = prompt("Name");
                             person.setName(name);
                             System.out.println(personService.create(person));
                             break;
                         case "get":
                         case "g":
                             System.out.println(personService.get(index));
+                            break;
+                        case "update":
+                        case "u":
+                            person = personService.get(index);
+                            name = prompt("Name");
+                            person.setName(name);
+                            personService.update(index, person);
                             break;
                         case "remove":
                         case "r":
