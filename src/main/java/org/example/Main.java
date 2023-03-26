@@ -19,6 +19,12 @@ public class Main {
         do {
             String command = prompt(COMMAND_MESSAGE).toLowerCase();
             String[] parts = command.split(" ");
+
+            if (parts.length < 2) {
+                System.out.println("Invalid command!");
+                continue;
+            }
+
             String action = parts[0];
             String entity = parts[1];
 
