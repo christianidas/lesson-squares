@@ -2,10 +2,9 @@ package org.example.Person.controller;
 
 import org.example.Person.entity.Person;
 import org.example.Person.service.PersonService;
+import org.example.util.CommandLineInterface;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 
 public class PersonController {
@@ -17,7 +16,7 @@ public class PersonController {
 
     public Person create() throws IOException {
         Person person = new Person();
-        String name = prompt("Name");
+        String name = CommandLineInterface.prompt("Name");
         person.setName(name);
         return personService.create(person);
     }
@@ -32,18 +31,12 @@ public class PersonController {
 
     public Person update(int index) throws IOException {
         Person person = personService.get(index);
-        String name = prompt("Name");
+        String name = CommandLineInterface.prompt("Name");
         person.setName(name);
         return personService.update(index, person);
     }
 
     public void delete(int index) {
         personService.delete(index);
-    }
-
-    private String prompt(String message) throws IOException {
-        System.out.printf("%s: ", message);
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        return bufferedReader.readLine();
     }
 }

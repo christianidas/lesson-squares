@@ -4,10 +4,9 @@ import org.example.Grid.controller.GridController;
 import org.example.Grid.service.GridService;
 import org.example.Person.controller.PersonController;
 import org.example.Person.service.PersonService;
+import org.example.util.CommandLineInterface;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Main {
     private static final String COMMAND_MESSAGE = "Please enter a command";
@@ -19,7 +18,7 @@ public class Main {
         final PersonController personController = new PersonController(personService);
 
         do {
-            String command = prompt(COMMAND_MESSAGE).toLowerCase();
+            String command = CommandLineInterface.prompt(COMMAND_MESSAGE).toLowerCase();
             String[] parts = command.split(" ");
 
             if (parts.length < 2) {
@@ -92,11 +91,5 @@ public class Main {
                     System.out.println("Invalid command!");
             }
         } while (true);
-    }
-
-    private static String prompt(String message) throws IOException {
-        System.out.printf("%s: ", message);
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        return bufferedReader.readLine();
     }
 }
