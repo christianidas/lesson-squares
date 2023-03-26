@@ -21,52 +21,46 @@ public class Main {
             String[] parts = command.split(" ");
             String action = parts[0];
             String entity = parts[1];
-            int index;
 
             if (command.equals("q")) {
                 break;
             }
 
-            switch (action) {
-                case "add":
-                case "a":
-                    switch (entity) {
-                        case "grid":
+            switch (entity) {
+                case "grid":
+                    switch (action) {
+                        case "add":
+                        case "a":
                             System.out.println(gridService.create(new Grid()));
                             break;
-                        case "person":
+                        case "get":
+                        case "g":
+                            System.out.println(gridService.get(Integer.parseInt(parts[2])));
+                            break;
+                        case "remove":
+                        case "r":
+                            gridService.delete(Integer.parseInt(parts[2]));
+                            break;
+                        default:
+                            System.out.println("Invalid command!");
+                    }
+                    break;
+                case "person":
+                    switch (action) {
+                        case "add":
+                        case "a":
                             Person person = new Person();
                             String name = prompt("Name");
                             person.setName(name);
                             System.out.println(personService.create(person));
                             break;
-                        default:
-                            System.out.println("Invalid command!");
-                    }
-                    break;
-                case "get":
-                case "g":
-                    index = Integer.parseInt(parts[2]);
-                    switch (entity) {
-                        case "grid":
-                            System.out.println(gridService.get(index));
+                        case "get":
+                        case "g":
+                            System.out.println(personService.get(Integer.parseInt(parts[2])));
                             break;
-                        case "person":
-                            System.out.println(personService.get(index));
-                            break;
-                        default:
-                            System.out.println("Invalid command!");
-                    }
-                    break;
-                case "remove":
-                case "r":
-                    index = Integer.parseInt(parts[2]);
-                    switch (entity) {
-                        case "grid":
-                            gridService.delete(index);
-                            break;
-                        case "person":
-                            personService.delete(index);
+                        case "remove":
+                        case "r":
+                            personService.delete(Integer.parseInt(parts[2]));
                             break;
                         default:
                             System.out.println("Invalid command!");
