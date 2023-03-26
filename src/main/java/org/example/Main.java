@@ -28,7 +28,7 @@ public class Main {
 
             String action = parts[0];
             String entity = parts[1];
-            int index = 0;
+            Integer index = null;
 
             if (parts.length > 2) {
                 index = Integer.parseInt(parts[2]);
@@ -47,15 +47,27 @@ public class Main {
                             break;
                         case "get":
                         case "g":
-                            CommandLineInterface.print(gridController.get(index));
+                            if (index != null) {
+                                CommandLineInterface.print(gridController.get(index));
+                            } else {
+                                CommandLineInterface.print(gridController.getAll());
+                            }
                             break;
                         case "update":
                         case "u":
-                            CommandLineInterface.print(gridController.update(index));
+                            if (index != null) {
+                                CommandLineInterface.print(gridController.update(index));
+                            } else {
+                                CommandLineInterface.print("Invalid command!");
+                            }
                             break;
                         case "remove":
                         case "r":
-                            gridController.delete(index);
+                            if (index != null) {
+                                gridController.delete(index);
+                            } else {
+                                CommandLineInterface.print("Invalid command!");
+                            }
                             break;
                         default:
                             CommandLineInterface.print("Invalid command!");
@@ -69,15 +81,27 @@ public class Main {
                             break;
                         case "get":
                         case "g":
-                            CommandLineInterface.print(personController.get(index));
+                            if (index != null) {
+                                CommandLineInterface.print(personController.get(index));
+                            } else {
+                                CommandLineInterface.print(personController.getAll());
+                            }
                             break;
                         case "update":
                         case "u":
-                            CommandLineInterface.print(personController.update(index));
+                            if (index != null) {
+                                CommandLineInterface.print(personController.update(index));
+                            } else {
+                                CommandLineInterface.print("Invalid command!");
+                            }
                             break;
                         case "remove":
                         case "r":
-                            personService.delete(index);
+                            if (index != null) {
+                                personService.delete(index);
+                            } else {
+                                CommandLineInterface.print("Invalid command!");
+                            }
                             break;
                         default:
                             CommandLineInterface.print("Invalid command!");
