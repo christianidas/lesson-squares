@@ -69,9 +69,9 @@ public class Main {
                                     break;
                                 case "remove":
                                 case "r":
+                                    grid = gridService.get(index);
                                     row = Integer.parseInt(prompt("Row"));
                                     col = Integer.parseInt(prompt("Col"));
-                                    grid = gridService.get(index);
                                     grid.getSquares().stream().filter(square -> square.getRow() == row && square.getCol() == col).findAny().ifPresent(square -> square.setOwner(null));
                                     break;
                                 default:
