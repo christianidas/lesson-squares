@@ -11,8 +11,12 @@ public class CommandLineInterface {
         System.out.println(message);
     }
 
-    public static String prompt(String message) throws IOException {
+    public static String prompt(String message) {
         System.out.printf("%s: ", message);
-        return bufferedReader.readLine();
+        try {
+            return bufferedReader.readLine();
+        } catch (IOException e) {
+            return prompt(message);
+        }
     }
 }

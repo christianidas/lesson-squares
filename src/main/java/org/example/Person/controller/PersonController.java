@@ -14,7 +14,7 @@ public class PersonController {
         this.personService = personService;
     }
 
-    public Person create() throws IOException {
+    public Person create() {
         Person person = new Person();
         String name = CommandLineInterface.prompt("Name");
         person.setName(name);
@@ -29,7 +29,7 @@ public class PersonController {
         return personService.get(index);
     }
 
-    public Person update(int index) throws IOException {
+    public Person update(int index) {
         Person person = personService.get(index);
         String name = CommandLineInterface.prompt("Name");
         person.setName(name);

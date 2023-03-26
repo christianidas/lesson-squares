@@ -11,7 +11,7 @@ import java.io.IOException;
 public class Main {
     private static final String COMMAND_MESSAGE = "Please enter a command";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         final GridService gridService = new GridService();
         final PersonService personService = new PersonService();
         final GridController gridController = new GridController(gridService, personService);
