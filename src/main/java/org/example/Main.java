@@ -22,7 +22,7 @@ public class Main {
             String[] parts = command.split(" ");
 
             if (parts.length < 2) {
-                System.out.println("Invalid command!");
+                CommandLineInterface.print("Invalid command!");
                 continue;
             }
 
@@ -43,18 +43,18 @@ public class Main {
                     switch (action) {
                         case "add":
                         case "a":
-                            System.out.println(gridController.create());
+                            CommandLineInterface.print(gridController.create());
                             break;
                         case "get":
                         case "g":
-                            System.out.println(gridController.get(index));
+                            CommandLineInterface.print(gridController.get(index));
                             break;
                         case "update":
                         case "u":
                             try {
-                                System.out.println(gridController.update(index));
+                                CommandLineInterface.print(gridController.update(index));
                             } catch (Exception e) {
-                                System.out.println(e.getMessage());
+                                CommandLineInterface.print(e.getMessage());
                             }
                             break;
                         case "remove":
@@ -62,33 +62,33 @@ public class Main {
                             gridController.delete(index);
                             break;
                         default:
-                            System.out.println("Invalid command!");
+                            CommandLineInterface.print("Invalid command!");
                     }
                     break;
                 case "person":
                     switch (action) {
                         case "add":
                         case "a":
-                            System.out.println(personController.create());
+                            CommandLineInterface.print(personController.create());
                             break;
                         case "get":
                         case "g":
-                            System.out.println(personController.get(index));
+                            CommandLineInterface.print(personController.get(index));
                             break;
                         case "update":
                         case "u":
-                            System.out.println(personController.update(index));
+                            CommandLineInterface.print(personController.update(index));
                             break;
                         case "remove":
                         case "r":
                             personService.delete(index);
                             break;
                         default:
-                            System.out.println("Invalid command!");
+                            CommandLineInterface.print("Invalid command!");
                     }
                     break;
                 default:
-                    System.out.println("Invalid command!");
+                    CommandLineInterface.print("Invalid command!");
             }
         } while (true);
     }
