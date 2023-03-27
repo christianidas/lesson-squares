@@ -17,6 +17,50 @@ public class GridController {
         this.personService = personService;
     }
 
+    public Object handler(String command) throws Exception {
+        String[] parts = command.split(" ");
+
+        if (parts.length < 2) {
+            throw new Exception("Invalid command!");
+        }
+
+        String action = parts[0];
+        Integer index = null;
+        if (parts.length > 2) {
+            index = Integer.parseInt(parts[2]);
+        }
+
+        switch (action) {
+            case "add":
+            case "a":
+                return create();
+            case "get":
+            case "g":
+                if (index != null) {
+                    return get(index);
+                } else {
+                    return getAll();
+                }
+            case "update":
+            case "u":
+                if (index != null) {
+                    return update(index);
+                } else {
+                    throw new Exception("Invalid command!");
+                }
+            case "remove":
+            case "r":
+                if (index != null) {
+                    delete(index);
+                } else {
+                    throw new Exception("Invalid command!");
+                }
+                return null;
+            default:
+                throw new Exception("Invalid command!");
+        }
+    }
+
     public Grid create() {
         Grid grid = new Grid();
         return gridService.create(grid);

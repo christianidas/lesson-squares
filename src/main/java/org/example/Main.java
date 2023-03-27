@@ -24,13 +24,7 @@ public class Main {
                 continue;
             }
 
-            String action = parts[0];
             String entity = parts[1];
-            Integer index = null;
-
-            if (parts.length > 2) {
-                index = Integer.parseInt(parts[2]);
-            }
 
             if (command.equals("q")) {
                 break;
@@ -38,71 +32,17 @@ public class Main {
 
             switch (entity) {
                 case "grid":
-                    switch (action) {
-                        case "add":
-                        case "a":
-                            CommandLineInterface.print(gridController.create());
-                            break;
-                        case "get":
-                        case "g":
-                            if (index != null) {
-                                CommandLineInterface.print(gridController.get(index));
-                            } else {
-                                CommandLineInterface.print(gridController.getAll());
-                            }
-                            break;
-                        case "update":
-                        case "u":
-                            if (index != null) {
-                                CommandLineInterface.print(gridController.update(index));
-                            } else {
-                                CommandLineInterface.print("Invalid command!");
-                            }
-                            break;
-                        case "remove":
-                        case "r":
-                            if (index != null) {
-                                gridController.delete(index);
-                            } else {
-                                CommandLineInterface.print("Invalid command!");
-                            }
-                            break;
-                        default:
-                            CommandLineInterface.print("Invalid command!");
+                    try {
+                        CommandLineInterface.print(gridController.handler(command));
+                    } catch (Exception e) {
+                        CommandLineInterface.print(e.getMessage());
                     }
                     break;
                 case "person":
-                    switch (action) {
-                        case "add":
-                        case "a":
-                            CommandLineInterface.print(personController.create());
-                            break;
-                        case "get":
-                        case "g":
-                            if (index != null) {
-                                CommandLineInterface.print(personController.get(index));
-                            } else {
-                                CommandLineInterface.print(personController.getAll());
-                            }
-                            break;
-                        case "update":
-                        case "u":
-                            if (index != null) {
-                                CommandLineInterface.print(personController.update(index));
-                            } else {
-                                CommandLineInterface.print("Invalid command!");
-                            }
-                            break;
-                        case "remove":
-                        case "r":
-                            if (index != null) {
-                                personService.delete(index);
-                            } else {
-                                CommandLineInterface.print("Invalid command!");
-                            }
-                            break;
-                        default:
-                            CommandLineInterface.print("Invalid command!");
+                    try {
+                        CommandLineInterface.print(personController.handler(command));
+                    } catch (Exception e) {
+                        CommandLineInterface.print(e.getMessage());
                     }
                     break;
                 default:
