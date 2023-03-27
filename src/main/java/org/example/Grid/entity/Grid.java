@@ -33,16 +33,6 @@ public class Grid {
         this.squares = squares;
     }
 
-    public void addSquare(int row, int col, String name) {
-        Person person = new Person();
-        person.setName(name);
-        squares.stream().filter(square -> square.getRow() == row && square.getCol() == col).forEach(square -> square.setOwner(person));
-    }
-
-    public void removeSquare(int row, int col) {
-        squares.stream().filter(square -> square.getRow() == row && square.getCol() == col).forEach(square -> square.setOwner(null));
-    }
-
     private int getRowCount() {
         return squares.stream().map(Square::getCol).max(Comparator.comparingInt(a -> a)).orElse(0) + 1;
     }
