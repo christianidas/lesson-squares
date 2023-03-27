@@ -6,8 +6,6 @@ import org.example.Person.controller.PersonController;
 import org.example.Person.service.PersonService;
 import org.example.util.CommandLineInterface;
 
-import java.io.IOException;
-
 public class Main {
     private static final String COMMAND_MESSAGE = "Please enter a command";
 
