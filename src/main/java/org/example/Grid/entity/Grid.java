@@ -3,6 +3,7 @@ package org.example.Grid.entity;
 import org.example.Person.entity.Person;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -40,6 +41,20 @@ public class Grid {
 
     public void setSquares(List<Square> squares) {
         this.squares = squares;
+    }
+
+    public void shuffle() {
+        Collections.shuffle(squares);
+        int rowCount = getRowCount();
+        int colCount = getColCount();
+        int squareIndex = 0;
+        for (int row = 0; row < rowCount; row++) {
+            for (int col = 0; col < colCount; col++) {
+                squares.get(squareIndex).setRow(row);
+                squares.get(squareIndex).setCol(col);
+                squareIndex++;
+            }
+        }
     }
 
     private int getRowCount() {
