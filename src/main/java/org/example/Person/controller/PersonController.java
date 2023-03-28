@@ -41,20 +41,18 @@ public class PersonController {
             case "u":
                 if (index != null) {
                     return update(index);
-                } else {
-                    throw new Exception("Invalid command!");
                 }
+                break;
             case "remove":
             case "r":
                 if (index != null) {
                     delete(index);
-                } else {
-                    throw new Exception("Invalid command!");
+                    return null;
                 }
-                return null;
-            default:
-                throw new Exception("Invalid command!");
+                break;
         }
+
+        throw new Exception("Invalid command!");
     }
 
     public Person create() {
