@@ -18,7 +18,7 @@ public class Main {
         do {
             String command = CommandLineInterface.prompt(COMMAND_MESSAGE).toLowerCase();
 
-            if (command.equals("q")) {
+            if (command.equals("q") || command.equals("quit")) {
                 break;
             }
 
