@@ -44,11 +44,11 @@ public class Grid {
     }
 
     private int getRowCount() {
-        return squares.stream().map(Square::getCol).max(Comparator.comparingInt(a -> a)).orElse(0);
+        return squares.stream().map(Square::getCol).max(Comparator.comparingInt(a -> a)).orElse(0) + 1;
     }
 
     private int getColCount() {
-        return squares.stream().map(Square::getRow).max(Comparator.comparingInt(a -> a)).orElse(0);
+        return squares.stream().map(Square::getRow).max(Comparator.comparingInt(a -> a)).orElse(0) + 1;
     }
 
     private Square getSquare(int row, int col) {
