@@ -35,9 +35,10 @@ public class Person {
 
     @Override
     public String toString() {
-        String str = "";
-        str += getName();
-        str += " (" + getInitials() + ")";
-        return str;
+        String str = "{";
+        str += " id: " + getId() + ",";
+        str +=  " name: " + getName() + ",";
+        str += " initials: " + getInitials() + "";
+        return str + " }";
     }
 }

@@ -57,6 +57,7 @@ public class Grid {
     @Override
     public String toString() {
         String str = " ";
+        str += "Grid: " + getId() + "\n";
         for (int i = 0; i < getColCount(); i++) {
             str += "    " + i;
         }
