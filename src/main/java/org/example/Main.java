@@ -17,6 +17,11 @@ public class Main {
 
         do {
             String command = CommandLineInterface.prompt(COMMAND_MESSAGE).toLowerCase();
+
+            if (command.equals("q")) {
+                break;
+            }
+
             String[] parts = command.split(" ");
 
             if (parts.length < 2) {
@@ -25,10 +30,6 @@ public class Main {
             }
 
             String entity = parts[1];
-
-            if (command.equals("q")) {
-                break;
-            }
 
             switch (entity) {
                 case "grid":
