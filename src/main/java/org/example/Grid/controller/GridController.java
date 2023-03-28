@@ -76,7 +76,7 @@ public class GridController {
         Grid grid;
         int row;
         int col;
-        String action = CommandLineInterface.prompt("Add or remove a square?");
+        String action = CommandLineInterface.prompt("Add a square, remove a square, or shuffle?");
         switch (action) {
             case "add":
             case "a":
@@ -93,6 +93,11 @@ public class GridController {
                 row = Integer.parseInt(CommandLineInterface.prompt("Row"));
                 col = Integer.parseInt(CommandLineInterface.prompt("Col"));
                 grid.getSquares().stream().filter(square -> square.getRow() == row && square.getCol() == col).findAny().ifPresent(square -> square.setOwner(null));
+                return gridService.update(index, grid);
+            case "shuffle":
+            case "s":
+                grid = gridService.get(index);
+                grid.shuffle();
                 return gridService.update(index, grid);
             default:
                 CommandLineInterface.print("Invalid command!");
