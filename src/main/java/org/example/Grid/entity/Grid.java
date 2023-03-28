@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Grid {
+    private Integer id;
     private List<Square> squares;
 
     public Grid() {
@@ -23,6 +24,14 @@ public class Grid {
                 squares.add(square);
             }
         }
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public List<Square> getSquares() {

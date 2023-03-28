@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersonService {
+    private Integer id = 0;
     private final List<Person> people = new ArrayList<>();
 
     public Person create(Person person) {
+        person.setId(id);
+        id++;
         people.add(person);
         return person;
     }

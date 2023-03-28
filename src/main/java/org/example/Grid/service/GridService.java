@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GridService {
+    private Integer id = 0;
     private final List<Grid> grids = new ArrayList<>();
 
     public Grid create(Grid grid) {
+        grid.setId(id);
+        id++;
         grids.add(grid);
         return grid;
     }
