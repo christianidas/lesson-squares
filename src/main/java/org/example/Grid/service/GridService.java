@@ -1,6 +1,7 @@
 package org.example.Grid.service;
 
 import org.example.Grid.entity.Grid;
+import org.example.Person.entity.Person;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -54,6 +55,21 @@ public class GridService {
                 Grid grid = new Grid();
                 int id = selectGridResult.getInt("id");
                 grid.setId(id);
+                grid.getSquares().forEach(square -> {
+                    try {
+                        PreparedStatement selectExistingSquareStatement = conn.prepareStatement(String.format("SELECT * FROM square AS s LEFT JOIN person AS p ON s.person_id=p.id WHERE grid_id=%d AND row=%d AND col=%d", index, square.getRow(), square.getCol()));
+                        ResultSet selectExistingSquareResult = selectExistingSquareStatement.executeQuery();
+
+                        if (selectExistingSquareResult.next()) {
+                            Person person = new Person();
+                            person.setId(selectExistingSquareResult.getInt("id"));
+                            person.setName(selectExistingSquareResult.getString("name"));
+                            square.setOwner(person);
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                });
                 return grid;
             }
         } catch (SQLException e) {
