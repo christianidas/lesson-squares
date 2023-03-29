@@ -68,9 +68,15 @@ public class PersonService {
     }
 
     public Person update(int index, Person person) {
-        Person res = get(index);
-        res.setName(person.getName());
-        return res;
+        try {
+            Connection conn = DriverManager.getConnection(connectionUrl, "squares", "squares");
+            PreparedStatement updatePersonStatement = conn.prepareStatement(String.format("UPDATE person SET name='%s' WHERE id=%d", person.getName(), index));
+            updatePersonStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public void delete(int index) {
