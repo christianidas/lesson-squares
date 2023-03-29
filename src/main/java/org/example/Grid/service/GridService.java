@@ -45,7 +45,22 @@ public class GridService {
     }
 
     public Grid get(int index) {
-        return grids.get(index);
+        try {
+            Connection conn = DriverManager.getConnection(connectionUrl, "squares", "squares");
+            PreparedStatement selectGridStatement = conn.prepareStatement(String.format("SELECT * FROM grid WHERE id=%d", index));
+            ResultSet selectGridResult = selectGridStatement.executeQuery();
+
+            if (selectGridResult.next()) {
+                Grid grid = new Grid();
+                int id = selectGridResult.getInt("id");
+                grid.setId(id);
+                return grid;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public Grid update(int index, Grid grid) {
