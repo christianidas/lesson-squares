@@ -108,6 +108,8 @@ public class GridService {
             Connection conn = DriverManager.getConnection(connectionUrl, "squares", "squares");
             PreparedStatement deleteGridStatement = conn.prepareStatement(String.format("DELETE FROM grid WHERE id=%d", index));
             deleteGridStatement.executeUpdate();
+            PreparedStatement deleteExistingSquareStatement = conn.prepareStatement(String.format("DELETE FROM square WHERE grid_id=%d", index));
+            deleteExistingSquareStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
