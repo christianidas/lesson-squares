@@ -25,7 +25,25 @@ public class PersonService {
     }
 
     public List<Person> getAll() {
-        return people;
+        List<Person> results = new ArrayList<>();
+        try {
+            Connection conn = DriverManager.getConnection(connectionUrl, "squares", "squares");
+            PreparedStatement selectPersonStatement = conn.prepareStatement("SELECT * FROM person");
+            ResultSet selectPersonResult = selectPersonStatement.executeQuery();
+
+            while (selectPersonResult.next()) {
+                Person person = new Person();
+                int id = selectPersonResult.getInt("id");
+                person.setId(id);
+                String name = selectPersonResult.getString("name");
+                person.setName(name);
+                results.add(person);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return results;
     }
 
     public Person get(int index) {
