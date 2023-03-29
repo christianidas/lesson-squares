@@ -80,6 +80,12 @@ public class PersonService {
     }
 
     public void delete(int index) {
-        people.remove(index);
+        try {
+            Connection conn = DriverManager.getConnection(connectionUrl, "squares", "squares");
+            PreparedStatement deletePersonStatement = conn.prepareStatement(String.format("DELETE FROM person WHERE id=%d", index));
+            deletePersonStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
