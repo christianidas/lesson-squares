@@ -2,18 +2,26 @@ package org.example.Person.service;
 
 import org.example.Person.entity.Person;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PersonService {
+    private final String connectionUrl = "jdbc:mysql://localhost:3306/squares?serverTimezone=UTC";
     private Integer id = 0;
     private final List<Person> people = new ArrayList<>();
 
     public Person create(Person person) {
-        person.setId(id);
-        id++;
-        people.add(person);
-        return person;
+        try {
+            Connection conn = DriverManager.getConnection(connectionUrl, "squares", "squares");
+            PreparedStatement ps = conn.prepareStatement(String.format("INSERT INTO person (name) VALUES('%s')", person.getName()));
+            ps.executeUpdate();
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public List<Person> getAll() {
