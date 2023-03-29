@@ -1,53 +1,54 @@
 package org.example;
 
-import org.example.Grid.Grid;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import org.example.Grid.controller.GridController;
+import org.example.Grid.service.GridService;
+import org.example.Person.controller.PersonController;
+import org.example.Person.service.PersonService;
+import org.example.util.CommandLineInterface;
 
 public class Main {
     private static final String COMMAND_MESSAGE = "Please enter a command";
 
-    public static void main(String[] args) throws IOException {
-        Grid grid = new Grid();
+    public static void main(String[] args) {
+        final GridService gridService = new GridService();
+        final PersonService personService = new PersonService();
+        final GridController gridController = new GridController(gridService, personService);
+        final PersonController personController = new PersonController(personService);
 
         do {
-            printGrid(grid);
+            String command = CommandLineInterface.prompt(COMMAND_MESSAGE).toLowerCase();
 
-            String command = prompt(COMMAND_MESSAGE).toLowerCase();
-
-            if (command.equals("q")) {
+            if (command.equals("q") || command.equals("quit")) {
                 break;
             }
 
-            switch (command) {
-                case "add":
-                case "a":
-                    int rowToAdd = Integer.parseInt(prompt("Row"));
-                    int colToAdd = Integer.parseInt(prompt("Col"));
-                    String name = prompt("Name");
-                    grid.addSquare(rowToAdd, colToAdd, name);
+            String[] parts = command.split(" ");
+
+            if (parts.length < 2) {
+                CommandLineInterface.print("Invalid command!");
+                continue;
+            }
+
+            String entity = parts[1];
+
+            switch (entity) {
+                case "grid":
+                    try {
+                        CommandLineInterface.print(gridController.handler(command));
+                    } catch (Exception e) {
+                        CommandLineInterface.print(e.getMessage());
+                    }
                     break;
-                case "remove":
-                case "r":
-                    int rowToRemove = Integer.parseInt(prompt("Row"));
-                    int colToRemove = Integer.parseInt(prompt("Col"));
-                    grid.removeSquare(rowToRemove, colToRemove);
+                case "person":
+                    try {
+                        CommandLineInterface.print(personController.handler(command));
+                    } catch (Exception e) {
+                        CommandLineInterface.print(e.getMessage());
+                    }
                     break;
                 default:
-                    System.out.println("Invalid command!");
+                    CommandLineInterface.print("Invalid command!");
             }
         } while (true);
-    }
-
-    private static void printGrid(Grid grid) {
-        System.out.print(grid);
-    }
-
-    private static String prompt(String message) throws IOException {
-        System.out.printf("%s: ", message);
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        return bufferedReader.readLine();
     }
 }

@@ -1,10 +1,19 @@
-package org.example.Person;
+package org.example.Person.entity;
 
 public class Person {
+    private Integer id;
     private String name;
 
     public Person() {
 
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -22,5 +31,14 @@ public class Person {
         } else {
             return parts[0].substring(0, 2);
         }
+    }
+
+    @Override
+    public String toString() {
+        String str = "{";
+        str += " id: " + getId() + ",";
+        str +=  " name: " + getName() + ",";
+        str += " initials: " + getInitials() + "";
+        return str + " }";
     }
 }

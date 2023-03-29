@@ -1,12 +1,14 @@
-package org.example.Grid;
+package org.example.Grid.entity;
 
-import org.example.Person.Person;
+import org.example.Person.entity.Person;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 public class Grid {
+    private Integer id;
     private List<Square> squares;
 
     public Grid() {
@@ -25,6 +27,14 @@ public class Grid {
         }
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public List<Square> getSquares() {
         return squares;
     }
@@ -33,14 +43,18 @@ public class Grid {
         this.squares = squares;
     }
 
-    public void addSquare(int row, int col, String name) {
-        Person person = new Person();
-        person.setName(name);
-        squares.stream().filter(square -> square.getRow() == row && square.getCol() == col).forEach(square -> square.setOwner(person));
-    }
-
-    public void removeSquare(int row, int col) {
-        squares.stream().filter(square -> square.getRow() == row && square.getCol() == col).forEach(square -> square.setOwner(null));
+    public void shuffle() {
+        Collections.shuffle(squares);
+        int rowCount = getRowCount();
+        int colCount = getColCount();
+        int squareIndex = 0;
+        for (int row = 0; row < rowCount; row++) {
+            for (int col = 0; col < colCount; col++) {
+                squares.get(squareIndex).setRow(row);
+                squares.get(squareIndex).setCol(col);
+                squareIndex++;
+            }
+        }
     }
 
     private int getRowCount() {
@@ -58,6 +72,7 @@ public class Grid {
     @Override
     public String toString() {
         String str = " ";
+        str += "Grid: " + getId() + "\n";
         for (int i = 0; i < getColCount(); i++) {
             str += "    " + i;
         }
