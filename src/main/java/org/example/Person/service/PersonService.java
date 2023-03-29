@@ -8,8 +8,6 @@ import java.util.List;
 
 public class PersonService {
     private final String connectionUrl = "jdbc:mysql://localhost:3306/squares?serverTimezone=UTC";
-    private Integer id = 0;
-    private final List<Person> people = new ArrayList<>();
 
     public Person create(Person person) {
         try {
