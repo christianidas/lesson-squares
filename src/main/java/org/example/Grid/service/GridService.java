@@ -80,9 +80,27 @@ public class GridService {
     }
 
     public Grid update(int index, Grid grid) {
-        Grid res = get(index);
-        res.setSquares(grid.getSquares());
-        return res;
+        try {
+            Connection conn = DriverManager.getConnection(connectionUrl, "squares", "squares");
+            // We'd have an UPDATE GRID call here if we had any fields to update there
+            // Clearing the squares for the grid
+            PreparedStatement deleteExistingSquareStatement = conn.prepareStatement(String.format("DELETE FROM square WHERE grid_id=%d", index));
+            deleteExistingSquareStatement.executeUpdate();
+            grid.getSquares().forEach(square -> {
+                if (square.getOwner() != null) {
+                    try {
+                        PreparedStatement addSquareStatement = conn.prepareStatement(String.format("INSERT INTO square (grid_id, row, col, person_id) VALUES(%d, %d, %d, %d)", index, square.getRow(), square.getCol(), square.getOwner().getId()));
+                        addSquareStatement.executeUpdate();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public void delete(int index) {
