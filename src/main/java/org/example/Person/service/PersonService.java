@@ -47,7 +47,24 @@ public class PersonService {
     }
 
     public Person get(int index) {
-        return people.get(index);
+        try {
+            Connection conn = DriverManager.getConnection(connectionUrl, "squares", "squares");
+            PreparedStatement selectPersonStatement = conn.prepareStatement(String.format("SELECT * FROM person WHERE id=%d", index));
+            ResultSet selectPersonResult = selectPersonStatement.executeQuery();
+
+            if (selectPersonResult.next()) {
+                Person person = new Person();
+                int id = selectPersonResult.getInt("id");
+                person.setId(id);
+                String name = selectPersonResult.getString("name");
+                person.setName(name);
+                return person;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public Person update(int index, Person person) {
