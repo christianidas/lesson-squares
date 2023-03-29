@@ -9,8 +9,6 @@ import java.util.List;
 
 public class GridService {
     private final String connectionUrl = "jdbc:mysql://localhost:3306/squares?serverTimezone=UTC";
-    private Integer id = 0;
-    private final List<Grid> grids = new ArrayList<>();
 
     public Grid create(Grid grid) {
         try {
