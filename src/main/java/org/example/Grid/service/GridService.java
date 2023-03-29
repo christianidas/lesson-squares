@@ -15,6 +15,14 @@ public class GridService {
             Connection conn = DriverManager.getConnection(connectionUrl, "squares", "squares");
             PreparedStatement ps = conn.prepareStatement("INSERT INTO grid VALUES()");
             ps.executeUpdate();
+            // This will return the last added person, so hopefully the insert worked
+            PreparedStatement selectGridStatement = conn.prepareStatement("SELECT * FROM person ORDER BY id DESC LIMIT 1");
+            ResultSet selectGridResult = selectGridStatement.executeQuery();
+            if (selectGridResult.next()) {
+                int id = selectGridResult.getInt("id");
+                grid.setId(id);
+                return grid;
+            }
             return null;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -94,6 +102,7 @@ public class GridService {
                     }
                 }
             });
+            return grid;
         } catch (SQLException e) {
             e.printStackTrace();
         }
