@@ -25,7 +25,23 @@ public class GridService {
     }
 
     public List<Grid> getAll() {
-        return grids;
+        List<Grid> results = new ArrayList<>();
+        try {
+            Connection conn = DriverManager.getConnection(connectionUrl, "squares", "squares");
+            PreparedStatement selectGridStatement = conn.prepareStatement("SELECT * FROM grid");
+            ResultSet selectGridResult = selectGridStatement.executeQuery();
+
+            while (selectGridResult.next()) {
+                Grid grid = new Grid();
+                int id = selectGridResult.getInt("id");
+                grid.setId(id);
+                results.add(grid);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return results;
     }
 
     public Grid get(int index) {
