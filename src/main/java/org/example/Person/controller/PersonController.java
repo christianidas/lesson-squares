@@ -9,7 +9,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/person")
 public class PersonController {
-    private final PersonService personService = new PersonService();
+    private final PersonService personService;
+
+    public PersonController(PersonService personService) {
+        this.personService = personService;
+    }
 
     @PostMapping("")
     public Person create(@RequestBody Person person) {
