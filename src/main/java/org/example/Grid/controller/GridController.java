@@ -9,7 +9,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/grid")
 public class GridController {
-    private final GridService gridService = new GridService();
+    private final GridService gridService;
+
+    public GridController(GridService gridService) {
+        this.gridService = gridService;
+    }
 
     @PostMapping("")
     public Grid create(@RequestBody Grid grid) {
