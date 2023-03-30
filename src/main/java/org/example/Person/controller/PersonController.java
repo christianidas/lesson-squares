@@ -4,6 +4,7 @@ import org.example.Person.entity.Person;
 import org.example.Person.service.PersonService;
 import org.example.util.CommandLineInterface;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -13,10 +14,7 @@ public class PersonController {
     private final PersonService personService = new PersonService();
 
     @PostMapping("/person")
-    public Person create() {
-        Person person = new Person();
-        String name = CommandLineInterface.prompt("Name");
-        person.setName(name);
+    public Person create(@RequestBody Person person) {
         return personService.create(person);
     }
 
