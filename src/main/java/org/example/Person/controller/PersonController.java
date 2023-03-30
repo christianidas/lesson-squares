@@ -22,8 +22,8 @@ public class PersonController {
     }
 
     @GetMapping("/person/{id}")
-    public Person get(@PathVariable("id") int index) {
-        return personService.get(index);
+    public Person get(@PathVariable int id) {
+        return personService.get(id);
     }
 
     public Person update(int index) {
