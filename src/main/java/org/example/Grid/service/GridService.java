@@ -2,11 +2,13 @@ package org.example.Grid.service;
 
 import org.example.Grid.entity.Grid;
 import org.example.Person.entity.Person;
+import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class GridService {
     private final String connectionUrl = "jdbc:mysql://localhost:3306/squares?serverTimezone=UTC";
 
