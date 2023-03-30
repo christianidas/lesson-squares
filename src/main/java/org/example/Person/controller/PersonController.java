@@ -2,7 +2,6 @@ package org.example.Person.controller;
 
 import org.example.Person.entity.Person;
 import org.example.Person.service.PersonService;
-import org.example.util.CommandLineInterface;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
