@@ -26,11 +26,9 @@ public class PersonController {
         return personService.get(id);
     }
 
-    public Person update(int index) {
-        Person person = personService.get(index);
-        String name = CommandLineInterface.prompt("Name");
-        person.setName(name);
-        return personService.update(index, person);
+    @PutMapping("/person/{id}")
+    public Person update(@PathVariable int id, @RequestBody Person person) {
+        return personService.update(id, person);
     }
 
     public void delete(int index) {
