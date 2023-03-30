@@ -31,7 +31,8 @@ public class PersonController {
         return personService.update(id, person);
     }
 
-    public void delete(int index) {
-        personService.delete(index);
+    @DeleteMapping("/person/{id}")
+    public void delete(@PathVariable int id) {
+        personService.delete(id);
     }
 }
