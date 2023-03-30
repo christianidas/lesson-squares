@@ -3,15 +3,13 @@ package org.example.Person.controller;
 import org.example.Person.entity.Person;
 import org.example.Person.service.PersonService;
 import org.example.util.CommandLineInterface;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RestController
 public class PersonController {
-    private final PersonService personService;
-
-    public PersonController(PersonService personService) {
-        this.personService = personService;
-    }
+    private final PersonService personService = new PersonService();
 
     public Object handler(String command) throws Exception {
         String[] parts = command.split(" ");
