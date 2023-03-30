@@ -3,6 +3,7 @@ package org.example.Person.controller;
 import org.example.Person.entity.Person;
 import org.example.Person.service.PersonService;
 import org.example.util.CommandLineInterface;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ public class PersonController {
         return personService.create(person);
     }
 
+    @GetMapping("/person")
     public List<Person> getAll() {
         return personService.getAll();
     }
