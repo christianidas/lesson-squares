@@ -32,13 +32,7 @@ public class PersonService {
         return personRepository.save(person);
     }
 
-    public void delete(int index) {
-        try {
-            Connection conn = DriverManager.getConnection(connectionUrl, "squares", "squares");
-            PreparedStatement deletePersonStatement = conn.prepareStatement(String.format("DELETE FROM person WHERE id=%d", index));
-            deletePersonStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void delete(int id) {
+        personRepository.deleteById(id);
     }
 }
