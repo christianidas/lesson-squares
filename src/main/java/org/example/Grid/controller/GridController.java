@@ -35,6 +35,13 @@ public class GridController {
         return gridService.update(id, grid);
     }
 
+    @PutMapping("/{id}/shuffle")
+    public Grid shuffle(@PathVariable int id) {
+        Grid grid = gridService.get(id);
+        grid.shuffle();
+        return gridService.update(id, grid);
+    }
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable int id) {
         gridService.delete(id);
