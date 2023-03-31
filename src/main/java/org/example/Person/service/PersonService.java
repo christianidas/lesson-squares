@@ -18,23 +18,7 @@ public class PersonService {
     }
 
     public Person create(Person person) {
-        try {
-            Connection conn = DriverManager.getConnection(connectionUrl, "squares", "squares");
-            PreparedStatement ps = conn.prepareStatement(String.format("INSERT INTO person (name) VALUES('%s')", person.getName()));
-            ps.executeUpdate();
-            // This will return the last added person, so hopefully the insert worked
-            PreparedStatement selectPersonStatement = conn.prepareStatement("SELECT * FROM person ORDER BY id DESC LIMIT 1");
-            ResultSet selectPersonResult = selectPersonStatement.executeQuery();
-            if (selectPersonResult.next()) {
-                int id = selectPersonResult.getInt("id");
-                person.setId(id);
-                return person;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+        return personRepository.save(person);
     }
 
     public List<Person> getAll() {
