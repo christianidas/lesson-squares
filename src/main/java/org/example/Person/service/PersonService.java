@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PersonService {
@@ -26,12 +25,7 @@ public class PersonService {
     }
 
     public Person get(int id) {
-        Optional<Person> optionalPerson = personRepository.findById(id);
-        if (optionalPerson.isPresent()) {
-            return optionalPerson.get();
-        }
-
-        return null;
+        return personRepository.findById(id).orElse(null);
     }
 
     public Person update(int index, Person person) {
