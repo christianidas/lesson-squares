@@ -28,17 +28,8 @@ public class PersonService {
         return personRepository.findById(id).orElse(null);
     }
 
-    public Person update(int index, Person person) {
-        try {
-            Connection conn = DriverManager.getConnection(connectionUrl, "squares", "squares");
-            PreparedStatement updatePersonStatement = conn.prepareStatement(String.format("UPDATE person SET name='%s' WHERE id=%d", person.getName(), index));
-            updatePersonStatement.executeUpdate();
-            return person;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+    public Person update(int id, Person person) {
+        return personRepository.save(person);
     }
 
     public void delete(int index) {
