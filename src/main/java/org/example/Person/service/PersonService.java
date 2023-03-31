@@ -1,6 +1,7 @@
 package org.example.Person.service;
 
 import org.example.Person.entity.Person;
+import org.example.Person.repository.PersonRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;
@@ -9,7 +10,12 @@ import java.util.List;
 
 @Service
 public class PersonService {
+    private final PersonRepository personRepository;
     private final String connectionUrl = "jdbc:mysql://localhost:3306/squares?serverTimezone=UTC";
+
+    public PersonService(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
 
     public Person create(Person person) {
         try {
