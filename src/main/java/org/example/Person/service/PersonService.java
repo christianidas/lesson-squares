@@ -5,7 +5,6 @@ import org.example.Person.repository.PersonRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,25 +21,7 @@ public class PersonService {
     }
 
     public List<Person> getAll() {
-        List<Person> results = new ArrayList<>();
-        try {
-            Connection conn = DriverManager.getConnection(connectionUrl, "squares", "squares");
-            PreparedStatement selectPersonStatement = conn.prepareStatement("SELECT * FROM person");
-            ResultSet selectPersonResult = selectPersonStatement.executeQuery();
-
-            while (selectPersonResult.next()) {
-                Person person = new Person();
-                int id = selectPersonResult.getInt("id");
-                person.setId(id);
-                String name = selectPersonResult.getString("name");
-                person.setName(name);
-                results.add(person);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return results;
+        return personRepository.findAll();
     }
 
     public Person get(int index) {
