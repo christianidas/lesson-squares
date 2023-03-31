@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonService {
@@ -24,22 +25,10 @@ public class PersonService {
         return personRepository.findAll();
     }
 
-    public Person get(int index) {
-        try {
-            Connection conn = DriverManager.getConnection(connectionUrl, "squares", "squares");
-            PreparedStatement selectPersonStatement = conn.prepareStatement(String.format("SELECT * FROM person WHERE id=%d", index));
-            ResultSet selectPersonResult = selectPersonStatement.executeQuery();
-
-            if (selectPersonResult.next()) {
-                Person person = new Person();
-                int id = selectPersonResult.getInt("id");
-                person.setId(id);
-                String name = selectPersonResult.getString("name");
-                person.setName(name);
-                return person;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public Person get(int id) {
+        Optional<Person> optionalPerson = personRepository.findById(id);
+        if (optionalPerson.isPresent()) {
+            return optionalPerson.get();
         }
 
         return null;
