@@ -2,6 +2,7 @@ package org.example.Grid.controller;
 
 import org.example.Grid.entity.Grid;
 import org.example.Grid.service.GridService;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,11 @@ public class GridController {
     @GetMapping("/{id}")
     public Grid get(@PathVariable int id) {
         return gridService.get(id);
+    }
+
+    @GetMapping(path = "/{id}", produces = MediaType.TEXT_PLAIN_VALUE)
+    public String getAsString(@PathVariable int id) {
+        return gridService.get(id).toString();
     }
 
     @PutMapping("/{id}")
