@@ -10,7 +10,8 @@ public class Square {
     private Integer id;
     private int row;
     private int col;
-    @Transient
+    @ManyToOne
+    @JoinColumn(name = "person_id")
     private Person owner;
 
     public Square() {
