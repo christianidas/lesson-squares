@@ -1,14 +1,19 @@
 package org.example.Grid.entity;
 
-import org.example.Person.entity.Person;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+@Entity
 public class Grid {
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "grid_id", referencedColumnName = "id")
     private List<Square> squares;
 
     public Grid() {

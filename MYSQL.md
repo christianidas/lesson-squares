@@ -70,3 +70,8 @@ CREATE TABLE `square` (
 > *Note: Now if you show tables again, you'll see our table created.*
 
 At this point, we now should have our database setup and accessible from our Java application.
+
+For Lesson 5, we need to add an id column to the squares table in order to let Spring Data register it as an entity
+```shell
+ALTER TABLE `square` ADD COLUMN id int NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
+```
