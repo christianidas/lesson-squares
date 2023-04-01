@@ -12,7 +12,8 @@ public class Grid {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-    @Transient
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "grid_id", referencedColumnName = "id")
     private List<Square> squares;
 
     public Grid() {
