@@ -1,6 +1,7 @@
 # Lesson Squares
 A step by step guide to build an entire web service for a squares application using Java Spring Boot, Spring Data, and a MySQL database. This repo will serve as the "final" product for this application, along with lessons to break down how we got there. The goal is to start an application from scratch, and use this as a guide to get to the same product.
 
+
 ## Prerequisites
 - This guide assumes that [IntelliJ Idea](https://www.jetbrains.com/idea/) is installed, and that you are able to create and run a Java application using the tool. A helpful tutorial can be found [here](https://www.jetbrains.com/help/idea/creating-and-running-your-first-java-application.html).
 - It would be beneficial to get familiarized with [Git](https://git-scm.com/) so you can follow along and commit as you go. A helpful tutorial can be found [here](https://www.w3schools.com/git/default.asp).
@@ -26,3 +27,6 @@ Add Spring Data, and simplify our code for manipulating our data. We will have c
 
 ### [Lesson 5.1](https://github.com/christianidas/lesson-squares/releases/tag/5.1)
 Create reusable abstract classes for all of our boilerplate CRUD (Create, Retrieve, Update, Delete) operations so we can avoid duplicating code for this common functionality across all of our entities.
+
+## Accomplishments
+After following this guide, you should have a basic understanding of creating a web service in Java Spring Boot, connecting to a database. Pieces of this will be helpful to reuse in plenty of scenarios. The goal is that you can now take this knowledge, and start creating your own apps, using your previous work as a guide, and **never stop learning!**
