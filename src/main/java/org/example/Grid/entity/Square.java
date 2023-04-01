@@ -1,14 +1,28 @@
 package org.example.Grid.entity;
 
+import jakarta.persistence.*;
 import org.example.Person.entity.Person;
 
+@Entity
 public class Square {
-    int row;
-    int col;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Integer id;
+    private int row;
+    private int col;
+    @Transient
     private Person owner;
 
     public Square() {
 
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public int getRow() {
