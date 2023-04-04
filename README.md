@@ -28,5 +28,8 @@ Add Spring Data, and simplify our code for manipulating our data. We will have c
 ### [Lesson 5.1](https://github.com/christianidas/lesson-squares/releases/tag/5.1)
 Create reusable abstract classes for all of our boilerplate CRUD (Create, Retrieve, Update, Delete) operations so we can avoid duplicating code for this common functionality across all of our entities.
 
+### [Lesson 5.2](https://github.com/christianidas/lesson-squares/releases/tag/5.2)
+Add a simple html page at the root of our app to showcase.
+
 ## Accomplishments
 After following this guide, you should have a basic understanding of creating a web service in Java Spring Boot, connecting to a database. Pieces of this will be helpful to reuse in plenty of scenarios. The goal is that you can now take this knowledge, and start creating your own apps, using your previous work as a guide, and **never stop learning!**
