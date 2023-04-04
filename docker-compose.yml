@@ -1,18 +1,14 @@
-version: '3.3'
+version: '3.7'
 services:
-  db:
-    image: mysql:5.7
-    restart: always
+  mongodb_container:
+    image: mongo:latest
     environment:
-      - MYSQL_DATABASE=squares
-      - MYSQL_USER=squares
-      - MYSQL_PASSWORD=squares
-      - MYSQL_ROOT_PASSWORD=squares
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
     ports:
-      - '3306:3306'
-    expose:
-      - '3306'
+      - 27017:27017
     volumes:
-      - my-db:/var/lib/mysql
+      - mongodb_data_container:/data/db
+
 volumes:
-  my-db:
+  mongodb_data_container:
