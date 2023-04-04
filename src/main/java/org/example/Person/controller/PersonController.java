@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/person")
+@CrossOrigin
 public class PersonController extends CrudController<Person, Integer> {
     public PersonController(PersonService service) {
         super(service);

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/grid")
+@CrossOrigin
 public class GridController extends CrudController<Grid, Integer> {
     private final GridService service;
 
