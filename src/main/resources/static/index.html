@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Squares</title>
+
+    <style>
+        table {
+            text-align: center;
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+
+        th {
+            height: 50px;
+            width: 50px;
+        }
+
+        td {
+            height: 50px;
+            width: 50px;
+            border: 1px solid black;
+        }
+
+        td:empty {
+            background-color: rgba(0, 0, 0, .1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="App">
+        <h1>Squares</h1>
+        <div id="people">
+            <h2>People</h2>
+            <button onclick="promptAddPerson()">Add</button>
+            <div id="personList"></div>
+        </div>
+        <div id="grids">
+            <h2>Grids</h2>
+            <button onclick="promptAddGrid()">Add</button>
+            <div id="gridList"></div>
+        </div>
+    </div>
+
+    <script>
+        const API = {
+            getPersons: async () => {
+                const res = await fetch(`http://localhost:8080/person`);
+                if (!res.ok) {
+                    throw new Error('Something went wrong');
+                }
+
+                return res.json();
+            },
+
+            addPerson: async (person) => {
+                const res = await fetch(`http://localhost:8080/person`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(person),
+                });
+                if (!res.ok) {
+                    throw new Error('Something went wrong');
+                }
+
+                return res.json();
+            },
+
+            editPerson: async (person) => {
+                const res = await fetch(`http://localhost:8080/person/${person.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(person),
+                });
+                if (!res.ok) {
+                    throw new Error('Something went wrong');
+                }
+
+                return res.json();
+            },
+
+            deletePerson: async (person) => {
+                const res = await fetch(`http://localhost:8080/person/${person.id}`, {
+                    method: 'DELETE',
+                });
+                if (!res.ok) {
+                    throw new Error('Something went wrong');
+                }
+            },
+
+            getGrids: async () => {
+                const res = await fetch(`http://localhost:8080/grid`);
+                if (!res.ok) {
+                    throw new Error('Something went wrong');
+                }
+
+                return res.json();
+            },
+
+            addGrid: async (grid) => {
+                const res = await fetch(`http://localhost:8080/grid`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(grid),
+                });
+                if (!res.ok) {
+                    throw new Error('Something went wrong');
+                }
+
+                return res.json();
+            },
+
+            updateGrid: async (grid) => {
+                const res = await fetch(`http://localhost:8080/grid/${grid.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(grid),
+                });
+                if (!res.ok) {
+                    throw new Error('Something went wrong');
+                }
+            },
+
+            shuffleGrid: async (grid) => {
+                const res = await fetch(`http://localhost:8080/grid/${grid.id}/shuffle`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                if (!res.ok) {
+                    throw new Error('Something went wrong');
+                }
+            },
+
+            deleteGrid: async (grid) => {
+                const res = await fetch(`http://localhost:8080/grid/${grid.id}`, {
+                    method: 'DELETE',
+                });
+                if (!res.ok) {
+                    throw new Error('Something went wrong');
+                }
+            },
+        };
+
+        const promptAddPerson = async () => {
+            const name = prompt("Enter a name");
+            if (name) {
+                await API.addPerson({
+                    name,
+                });
+                render();
+            }
+        };
+
+        const promptAddGrid = async () => {
+            await API.addGrid({});
+            render();
+        };
+
+        const render = async () => {
+            let persons = [];
+            let grids = [];
+
+            const updatePersons = async () => {
+                persons = await API.getPersons();
+            };
+
+            const updateGrids = async () => {
+                grids = await API.getGrids();
+            };
+
+            const updateData = async () => {
+                await updatePersons();
+                await updateGrids();
+            };
+
+            await updateData();
+
+            const personList = document.getElementById('personList');
+            personList.innerHTML = '';
+
+            persons.forEach(person => {
+                const personDiv = document.createElement('div');
+                personList.append(personDiv);
+
+                const personHeader = document.createElement('h4');
+                personHeader.innerHTML = `${person.id}. ${person.name} (${person.initials})`;
+                personDiv.append(personHeader);
+
+                const personActions = document.createElement('div');
+                personActions.classList = 'actions';
+                personDiv.append(personActions);
+
+                const editPersonButton = document.createElement('button');
+                editPersonButton.innerHTML = 'Edit';
+                editPersonButton.onclick = async () => {
+                    const name = prompt("Enter a name");
+                    if (name) {
+                        await API.editPerson({
+                            ...person,
+                            name,
+                        });
+                        render();
+                    }
+                };
+                personActions.append(editPersonButton);
+
+                const deletePersonButton = document.createElement('button');
+                deletePersonButton.innerHTML = 'Delete';
+                deletePersonButton.onclick = async () => {
+                    await API.deletePerson(person);
+                    render();
+                };
+                personActions.append(deletePersonButton);
+            });
+
+            const gridList = document.getElementById('gridList');
+            gridList.innerHTML = '';
+            grids.forEach(grid => {
+                const columns = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+                const rows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+                
+                const gridDiv = document.createElement('div');
+                gridList.append(gridDiv);
+
+                const gridHeader = document.createElement('h4');
+                gridHeader.innerHTML = `${grid.id}. Grid ${grid.id}`;
+                gridDiv.append(gridHeader);
+
+                const gridActions = document.createElement('div');
+                gridActions.classList = 'actions';
+                gridDiv.append(gridActions);
+
+                const gridShuffleButton = document.createElement('button');
+                gridShuffleButton.innerHTML = 'Shuffle';
+                gridShuffleButton.onclick = async () => {
+                    await API.shuffleGrid(grid);
+                    render();
+                };
+                gridActions.append(gridShuffleButton);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.innerHTML = 'Delete';
+                deleteButton.onclick = async () => {
+                    await API.deleteGrid(grid);
+                    render();
+                };
+                gridActions.append(deleteButton);
+
+                const gridTable = document.createElement('table');
+                gridDiv.append(gridTable);
+
+                const gridTableHeader = document.createElement('thead');
+                gridTable.append(gridTableHeader);
+
+                const gridTableHeaderRow = document.createElement('tr');
+                gridTableHeader.append(gridTableHeaderRow);
+
+                gridTableHeaderRow.append(document.createElement('th'));
+                columns.forEach((col) => {
+                    const colHeader = document.createElement('th');
+                    colHeader.innerHTML = col;
+                    gridTableHeaderRow.append(colHeader);
+                });
+
+                const gridTableBody = document.createElement('tbody');
+                gridTable.append(gridTableBody);
+
+                rows.forEach((row) => {
+                    const gridTableRow = document.createElement('tr');
+                    gridTableBody.append(gridTableRow);
+
+                    const rowHeader = document.createElement('th');
+                    rowHeader.innerHTML = row;
+                    gridTableRow.append(rowHeader);
+
+                    columns.forEach((col) => {
+                        const gridTableColumn = document.createElement('td');
+                        gridTableRow.append(gridTableColumn);
+
+                        const square = grid.squares.find((square) => square.row === row && square.col === col);
+                        if (square.owner) {
+                            gridTableColumn.innerHTML = square.owner.initials;
+                        }
+                        gridTableColumn.onclick = async () => {
+                            const name = prompt("Enter a name");
+                            if (name) {
+                                let person = persons.find((person) => person.name === name);
+                                if (person) {
+                                    square.owner = person;
+                                } else {
+                                    square.owner = await API.addPerson({
+                                        name,
+                                    });
+                                }
+                            } else {
+                                square.owner = null;
+                            }
+                            await API.updateGrid(grid);
+                            render();
+                        };
+                    });
+                });
+            });
+
+        };
+
+        render();
+    </script>
+</body>
+
+</html>
