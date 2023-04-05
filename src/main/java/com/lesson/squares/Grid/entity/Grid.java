@@ -1,19 +1,15 @@
 package com.lesson.squares.Grid.entity;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-@Entity
 public class Grid {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "grid_id", referencedColumnName = "id")
+    private String id;
     private List<Square> squares;
 
     public Grid() {
@@ -32,11 +28,11 @@ public class Grid {
         }
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

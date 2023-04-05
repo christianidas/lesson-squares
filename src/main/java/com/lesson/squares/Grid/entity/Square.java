@@ -1,29 +1,16 @@
 package com.lesson.squares.Grid.entity;
 
-import jakarta.persistence.*;
 import com.lesson.squares.Person.entity.Person;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
-@Entity
 public class Square {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
     private int row;
     private int col;
-    @ManyToOne
-    @JoinColumn(name = "person_id")
+    @DBRef
     private Person owner;
 
     public Square() {
 
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public int getRow() {

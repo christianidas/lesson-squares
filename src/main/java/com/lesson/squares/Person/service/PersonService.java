@@ -6,7 +6,7 @@ import com.lesson.squares.crud.service.CrudService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PersonService extends CrudService<Person, Integer> {
+public class PersonService extends CrudService<Person, String> {
     public PersonService(PersonRepository repository) {
         super(repository);
     }
