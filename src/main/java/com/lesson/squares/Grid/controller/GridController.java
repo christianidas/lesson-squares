@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/grid")
 @CrossOrigin
-public class GridController extends CrudController<Grid, Integer> {
+public class GridController extends CrudController<Grid, String> {
     private final GridService service;
 
     public GridController(GridService service) {
@@ -18,12 +18,12 @@ public class GridController extends CrudController<Grid, Integer> {
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.TEXT_PLAIN_VALUE)
-    public String getAsString(@PathVariable int id) {
+    public String getAsString(@PathVariable String id) {
         return service.get(id).toString();
     }
 
     @PutMapping("/{id}/shuffle")
-    public Grid shuffle(@PathVariable int id) {
+    public Grid shuffle(@PathVariable String id) {
         Grid grid = service.get(id);
         grid.shuffle();
         return service.update(id, grid);
