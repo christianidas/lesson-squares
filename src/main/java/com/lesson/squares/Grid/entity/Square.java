@@ -1,10 +1,12 @@
 package com.lesson.squares.Grid.entity;
 
 import com.lesson.squares.Person.entity.Person;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 public class Square {
     private int row;
     private int col;
+    @DBRef
     private Person owner;
 
     public Square() {
